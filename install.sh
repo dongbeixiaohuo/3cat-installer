@@ -6,7 +6,10 @@ PACKAGE_SHA256="04e4825f7b268c3a94042ac85dcd901a74800f3e53f7e35bfee8636b4f3be747
 INSTALLER_SHA256="9d2bb17bf981296ec6fdc324d738970ac35ada849b1066943aaa5c636288750e"
 [[ "$IMAGE" == crpi-nyie09t1c748gc2d.cn-shanghai.personal.cr.aliyuncs.com/dantedocker/3cat-aigateway@sha256:* ]] || exit 2
 [[ "$PACKAGE_SHA256" =~ ^[a-f0-9]{64}$ && "$INSTALLER_SHA256" =~ ^[a-f0-9]{64}$ ]] || exit 2
-[ "$(id -u)" = 0 ] || { echo '请使用 sudo bash 执行'; exit 1; }
+if [ "$(id -u)" != 0 ]; then
+  command -v sudo >/dev/null || { echo '请使用管理员账号登录服务器后重新执行安装命令'; exit 1; }
+  exec sudo bash "$0" "$@"
+fi
 [ "$(uname -s)" = Linux ] && [ "$(uname -m)" = x86_64 ] || { echo '仅支持 Linux amd64'; exit 1; }
 if ! command -v docker >/dev/null; then
   . /etc/os-release
