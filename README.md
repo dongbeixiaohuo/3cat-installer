@@ -7,7 +7,7 @@
 在自己有写权限的可信目录中执行下面一条命令，先下载并核验 SHA-256，再以 root 权限安装
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/dongbeixiaohuo/3cat-installer/v2026.10.22/install.sh -o 3cat-install.sh && echo '7afe12b6f696aaa4f3128f14c74e88acb66b51761e4439babcd9a7d340858079  3cat-install.sh' | sha256sum -c - && sudo bash ./3cat-install.sh
+curl -4 -fsSL --connect-timeout 15 --max-time 60 https://raw.githubusercontent.com/dongbeixiaohuo/3cat-installer/v2026.10.22/install.sh -o 3cat-install.sh && echo '7afe12b6f696aaa4f3128f14c74e88acb66b51761e4439babcd9a7d340858079  3cat-install.sh' | sha256sum -c - && sudo bash ./3cat-install.sh
 ```
 
 支持 Linux amd64 和 systemd。Ubuntu/Debian 可按已配置软件源安装 Docker 与相关工具；其他系统需事先准备依赖。系统工具安装仍需对应软件源可达
