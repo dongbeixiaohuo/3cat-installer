@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 umask 077
-IMAGE="crpi-nyie09t1c748gc2d.cn-shanghai.personal.cr.aliyuncs.com/dantedocker/3cat-aigateway@sha256:ae6b622f9030caa2328deeddbf3cf760f2c7fb47633b1787f16909a89a76916e"
-PACKAGE_SHA256="d0729170b4bbe7a82141396b7213732be31940c66917bbedf7543f378b8c032f"
-INSTALLER_SHA256="460a331aaecf3840cf01f710cf1a0c65cebbf5425f41474e8161f7c5e2813828"
+IMAGE="crpi-nyie09t1c748gc2d.cn-shanghai.personal.cr.aliyuncs.com/dantedocker/3cat-aigateway@sha256:4c18003749ca9e3d8beb57ff31cf608c956ed902c8c3066b72acda2a34629d62"
+PACKAGE_SHA256="e04ab87e32d1e62237e1ffbd52924f459b48d522445533beb289c8139df546d6"
+INSTALLER_SHA256="9e6c08b7439ea662504a021d97f36438f8cfc2fb4adbcd55c85ac12d36bdb6d9"
 [[ "$IMAGE" == crpi-nyie09t1c748gc2d.cn-shanghai.personal.cr.aliyuncs.com/dantedocker/3cat-aigateway@sha256:* ]] || exit 2
 [[ "$PACKAGE_SHA256" =~ ^[a-f0-9]{64}$ && "$INSTALLER_SHA256" =~ ^[a-f0-9]{64}$ ]] || exit 2
 if [ "$(id -u)" != 0 ]; then

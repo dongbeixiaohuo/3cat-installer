@@ -13,14 +13,14 @@ curl -fsSO 'https://3cat-install.oss-cn-shanghai.aliyuncs.com/install.{sh,sha256
 按提示输入阿里云镜像仓库用户名及密码，密码输入时不显示字符属于正常现象。随后进入中文向导：
 
 1. 安装及数据保存目录默认 `/opt/3cat`，回车接受或直接输入其他完整目录
-2. 网页/API 端口默认 `4000`，回车接受或直接输入其他端口
+2. 网页/API 端口默认 `9876`，回车接受或直接输入其他端口
 3. 核对完整数据目录和访问地址，回车确认，或输入 n/q 取消
 
 目录已有内容时建议新的空目录，端口被占用时建议空闲端口，不覆盖原目录、不停止旧服务。输入错误时允许重新输入
 
 如提示 sudo 密码，输入当前服务器账号的登录密码；镜像仓库密码是单独设置的访问凭证，不是阿里云 AccessKey
 
-安装结束会显示管理页面、端口、默认账号 `admin`、每台随机生成的管理密码及数据库/Redis 连接信息，并保存到 `/opt/3cat/deploy/installation-info.txt`，权限为 `600`。默认网关端口 `4000/TCP`，PostgreSQL 和 Redis 仅在容器内网访问。请保存完成信息，不要公开包含密码的截图
+安装结束会显示管理页面、端口、默认账号 `admin`、每台随机生成的管理密码及数据库/Redis 连接信息，并保存到 `/opt/3cat/deploy/installation-info.txt`，权限为 `600`。默认网关端口 `9876/TCP`，PostgreSQL 数据库和账号均为 `3catag`，内网地址 `db:5432`；Redis 仅在容器内网访问。请保存完成信息，不要公开包含密码的截图
 
 支持 Linux amd64 和 systemd。Ubuntu/Debian 可按已配置软件源安装 Docker 与相关工具；下载入口需有 curl，系统包安装仍需软件源可达。普通用户会自动请求 sudo，root 用户直接执行。已有内容的安装目录会保留并拒绝覆盖，本入口用于首次安装
 
@@ -34,6 +34,6 @@ curl -fsSO 'https://3cat-install.oss-cn-shanghai.aliyuncs.com/install.{sh,sha256
 
 ## 版本与维护
 
-当前 OSS 入口版本为 `v2026.10.22-wizard1`，固定地址为 `https://3cat-install.oss-cn-shanghai.aliyuncs.com/v2026.10.22-wizard1/install.sh`，入口 SHA-256 为 `8d0a4e02c9cf967c1d71df9d2ec20c2af3f4da48e357ed40a34623b8bdbbb3a9`。根地址提供当前安装版本，配套校验文件与脚本一起更新；校验失败时不会执行安装。更新前应检查脚本不含凭据，保留旧版本
+当前 OSS 入口版本为 `v2026.10.22-defaults1`，固定地址为 `https://3cat-install.oss-cn-shanghai.aliyuncs.com/v2026.10.22-defaults1/install.sh`，入口 SHA-256 为 `d22d2282f6c6a83fd1aae3e1b409e9e39c350a57088d878557623eba3748f934`。根地址提供当前安装版本，配套校验文件与脚本一起更新；校验失败时不会执行安装。更新前应检查脚本不含凭据，保留旧版本
 
-GitHub 保留入口源码与固定版本，作为维护和备用渠道。`v2026.10.22` 旧标签保持不变。17 项 Linux 安装行为测试、27 项备份/监控回归通过（1 项平台跳过）；真实隔离安装、systemd 监控、本地 bind mount、重建三个容器后的数据保持、在线备份实际恢复校验均已通过。测试使用已具备 Docker 的系统，没有重复验证空白 OS 的系统包安装
+GitHub 保留入口源码与固定版本，作为维护和备用渠道。`v2026.10.22` 旧标签保持不变。当前默认值版本通过 17 项 Linux 安装行为测试，以及一次性隔离三服务的实际初始化、9876 端口、数据库/账号和 UI/Redis 健康验证；现有实例未更新。持久化、systemd 监控和备份恢复验证沿用同一工具的上一版记录，本次未重复空白 OS 系统包安装
